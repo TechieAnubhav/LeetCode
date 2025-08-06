@@ -43,8 +43,8 @@ class Solution:
             return True
         else:
             return False
+```
 
-```markdown
 ## 🧩 How I Solved It — Step-by-Step
 
 1. **Convert to String**  
