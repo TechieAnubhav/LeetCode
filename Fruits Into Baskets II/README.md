@@ -79,7 +79,7 @@ class Solution:
 
 ### ✅ Block 2 — Explanation, Complexity, and Improvements
 
-```markdown
+
 ## 🧩 How I Solved It — Step-by-Step
 
 1. **Loop Through Fruits:**  
