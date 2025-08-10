@@ -26,13 +26,7 @@ Output: false
 
 ---
 
-## Solution
-We sort the digits of `n` and compare them with the sorted digits of all possible powers of 2 up to the constraint limit.  
-If a match exists, then `n` can be reordered to form a power of two.
-
----
-
-**Python Code:**
+## Code
 ```python
 class Solution:
     def reorderedPowerOf2(self, n: int) -> bool:
@@ -45,3 +39,24 @@ class Solution:
             p.append(a)
         return s in p
 ```
+
+---
+
+🧩 **How I Solved It — Step-by-Step**  
+1. Convert `n` to a string and sort its digits.  
+2. Precompute all powers of 2 up to `2³⁰` (since 2³⁰ = 1,073,741,824 > 10⁹).  
+3. For each power of 2, sort its digits and store them in a list.  
+4. Check if the sorted string of `n` exists in the list of sorted power-of-two strings.  
+5. Return `True` if found, else `False`.
+
+---
+
+🛠️ **Possible Improvements**  
+- Use a `set` instead of a `list` for faster membership lookup.  
+- Avoid recomputing the sorted powers of 2 every function call by storing them as a static precomputed variable.
+
+---
+
+🧠 **Time & Space Complexity**  
+- **Time Complexity:** O(1) — Only 30 fixed powers of 2 to check, each sort is on ≤ 10 digits.  
+- **Space Complexity:** O(1) — Stores at most 30 sorted strings.
