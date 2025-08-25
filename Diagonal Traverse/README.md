@@ -37,4 +37,52 @@ class Solution:
         result = []
         row = col = 0
 
-        for _ in_
+        for _ in range(m * n):
+            result.append(mat[row][col])
+
+            if (row + col) % 2 == 0:  # moving up-right
+                if col == n - 1:
+                    row += 1
+                elif row == 0:
+                    col += 1
+                else:
+                    row -= 1
+                    col += 1
+            else:  # moving down-left
+                if row == m - 1:
+                    col += 1
+                elif col == 0:
+                    row += 1
+                else:
+                    row += 1
+                    col -= 1
+
+        return result
+```
+
+---
+
+🧩 **How I Solved It — Step-by-Step**  
+1. Start from `mat[0][0]`.  
+2. Traverse diagonals alternately:  
+   - If `(row+col)` is even → move up-right.  
+   - Else → move down-left.  
+3. Handle boundary conditions:  
+   - If at last column → move down.  
+   - If at first row → move right.  
+   - If at last row → move right.  
+   - If at first column → move down.  
+4. Collect all elements until `m*n` elements are added.  
+
+---
+
+🛠️ **Possible Improvements**  
+- Could use a **hash map of diagonals** (`row+col` as key, append elements) and then reverse alternating diagonals.  
+  - Simpler to implement but uses **extra space**.  
+- Current pointer approach is **space-optimal**.  
+
+---
+
+🧠 **Time & Space Complexity**  
+- Time: **O(m * n)** (each element is visited once).  
+- Space: **O(1)** extra (ignoring output array).  
