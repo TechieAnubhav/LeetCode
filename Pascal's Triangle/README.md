@@ -7,6 +7,8 @@ In Pascal's triangle, each number is the sum of the two numbers directly above i
 
 ---
 
+## Examples
+
 **Example 1:**
 ```
 Input: numRows = 5
@@ -21,8 +23,8 @@ Output: [[1]]
 
 ---
 
-**Constraints:**
-- 1 <= numRows <= 30  
+## Constraints
+- 1 <= numRows <= 30
 
 ---
 
@@ -30,37 +32,42 @@ Output: [[1]]
 ```python
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        triangle = [[1]]
+        result= []
+        if numRows==0:
+            return result
         
-        for i in range(1, numRows):
-            prev = triangle[-1]
-            row = [1]
-            
-            for j in range(1, len(prev)):
-                row.append(prev[j-1] + prev[j])
-            
-            row.append(1)
-            triangle.append(row)
-        
-        return triangle
+        first_row=[1]
+        result.append(first_row)
+        for i in range(1,numRows):
+            prev_row=result[i-1]
+            current_row=[1]
+            for j in range(1,i):
+                current_row.append(prev_row[j-1] + prev_row[j])
+            current_row.append(1)
+            result.append(current_row)
+        return result
 ```
 
 ---
 
-🧩 **How I Solved It — Step-by-Step**  
-1. Start with the first row `[1]`.  
-2. For each new row, begin and end with `1`.  
-3. Each middle element is the sum of the two numbers directly above it.  
-4. Repeat until `numRows` rows are built.  
+## 🧩 How I Solved It — Step-by-Step
+1. Start with an empty list `result` to store rows.  
+2. Add the first row `[1]` as the base case.  
+3. For each subsequent row:  
+   - Begin with `1`.  
+   - For each element in the middle, sum the two numbers directly above (`prev_row[j-1] + prev_row[j]`).  
+   - End the row with `1`.  
+4. Append each row to `result`.  
+5. Return `result`.
 
 ---
 
-🛠️ **Possible Improvements**  
-- If only the *n-th row* is needed, we can compute it directly using binomial coefficients instead of building the entire triangle.  
-- For memory optimization, we could generate only the previous row and current row instead of storing the whole triangle.  
+## 🛠️ Possible Improvements
+- The solution is already optimal, but we can reduce space if we only return the last row instead of storing all rows when required in a different variant of the problem.  
+- Could also use recursion with memoization to build rows.
 
 ---
 
-🧠 **Time & Space Complexity**  
-- **Time Complexity:** O(numRows²) — since each row is built by summing up elements from the previous row.  
-- **Space Complexity:** O(numRows²) — storing the entire triangle.  
+## 🧠 Time & Space Complexity
+- **Time Complexity:** O(numRows²), since each row computation depends on all previous rows.  
+- **Space Complexity:** O(numRows²), because we store the entire triangle in memory.  
